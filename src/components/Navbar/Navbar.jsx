@@ -1,26 +1,32 @@
 import "./Navbar.css";
-import { FaSearch, FaHeart, FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <nav className="navbar">
-      <div className="logo">
-        <span className="logo-icon">🎬</span>
-        <h2>MediaMatch</h2>
-      </div>
+
+      <h2 className="logo">🎬 MediaMatch</h2>
 
       <ul className="nav-links">
-        <li>Home</li>
-        <li>Movies</li>
-        <li>Books</li>
-        <li>Favorites</li>
+
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+
+        <li>
+          <Link to="/movies">Movies</Link>
+        </li>
+
+        <li>
+          <Link to="/books">Books</Link>
+        </li>
+
+        <li>
+          <Link to="/favorites">Favorites</Link>
+        </li>
+
       </ul>
 
-      <div className="nav-icons">
-        <FaSearch />
-        <FaHeart />
-        <FaUserCircle />
-      </div>
     </nav>
   );
 }
