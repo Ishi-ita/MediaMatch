@@ -1,0 +1,15 @@
+.popular-books {
+  padding: 80px 8%;
+}
+
+.popular-books h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
