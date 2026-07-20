@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
-import "./TrendingMovies.css";
+import "./TopRatedMovies.css";
 
 import MovieCard from "../MovieCard/MovieCard";
 import SectionTitle from "../SectionTitle/SectionTitle";
 
-import { getTrendingMovies } from "../../services/tmdb";
+import { getTopRatedMovies } from "../../services/tmdb";
 
-function TrendingMovies() {
+function TopRatedMovies() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     async function loadMovies() {
-      const data = await getTrendingMovies();
+      const data = await getTopRatedMovies();
       setMovies(data);
     }
 
@@ -20,8 +20,8 @@ function TrendingMovies() {
   }, []);
 
   return (
-    <section className="trending-movies">
-      <SectionTitle icon="🔥" title="Trending Movies" />
+    <section className="top-rated-movies">
+      <SectionTitle icon="⭐" title="Top Rated Movies" />
 
       <div className="movies-grid">
         {movies.map((movie) => (
@@ -37,4 +37,4 @@ function TrendingMovies() {
   );
 }
 
-export default TrendingMovies;
+export default TopRatedMovies;

@@ -1,11 +1,12 @@
 import "./PopularBooks.css";
 import BookCard from "../BookCard/BookCard";
 import books from "../../data/books";
+import SectionTitle from "../SectionTitle/SectionTitle";
 
 function PopularBooks() {
   return (
     <section className="popular-books">
-      <h2>📚 Popular Books</h2>
+      <SectionTitle icon="📚" title="Popular Books" />
 
       <div className="book-grid">
         {books.map((book) => (
