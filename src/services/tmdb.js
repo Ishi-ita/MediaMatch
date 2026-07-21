@@ -21,3 +21,23 @@ export async function getTopRatedMovies() {
 
   return data.results;
 }
+
+
+
+export async function getPopularMovies(page = 1) {
+  const response = await fetch(
+    `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`
+  );
+
+  const data = await response.json();
+  return data.results;
+}
+
+export async function searchMovies(query) {
+  const response = await fetch(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
+  );
+
+  const data = await response.json();
+  return data.results;
+}
