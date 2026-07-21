@@ -1,0 +1,10 @@
+.movie-details {
+  min-height: 100vh;
+  padding: 80px 8%;
+  background: var(--background);
+}
+
+.movie-details h1 {
+  color: white;
+  font-size: 3rem;
+}

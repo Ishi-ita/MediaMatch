@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 import "./MovieCard.css";
 
-function MovieCard({ title, rating, image }) {
+function MovieCard({ title, rating, image, id }) {
   return (
-    <div className="movie-card">
+    <Link to={`/movie/${id}`} className="movie-card">
       <img src={image} alt={title} />
 
       <div className="movie-info">
@@ -10,7 +12,7 @@ function MovieCard({ title, rating, image }) {
 
         <p>⭐ {rating}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 
