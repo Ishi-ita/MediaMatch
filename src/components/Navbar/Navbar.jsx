@@ -25,6 +25,8 @@ function Navbar() {
           <Link to="/favorites">Favorites</Link>
         </li>
 
+        
+
       </ul>
 
     </nav>

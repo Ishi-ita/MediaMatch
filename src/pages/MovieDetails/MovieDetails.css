@@ -116,3 +116,27 @@
   background: #7c3aed;
   transform: translateY(-2px);
 }
+
+.favorite-btn {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 15px;
+  padding: 14px 28px;
+
+  border: none;
+  border-radius: 30px;
+
+  background: #ef4444;
+  color: white;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.favorite-btn:hover {
+  background: #dc2626;
+}

@@ -8,30 +8,57 @@ import {
   getMovieVideos,
 } from "../../services/tmdb";
 
+import {
+  getFavorites,
+  saveFavorites,
+} from "../../utils/favorites";
+
 function MovieDetails() {
   const { id } = useParams();
 
   const [movie, setMovie] = useState(null);
   const [trailer, setTrailer] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     async function loadMovie() {
-  const data = await getMovieDetails(id);
-  setMovie(data);
+      const data = await getMovieDetails(id);
+      setMovie(data);
 
-  const videos = await getMovieVideos(id);
+      const favorites = getFavorites();
+      setIsFavorite(favorites.includes(data.id));
 
-  const officialTrailer = videos.find(
-    (video) =>
-      video.site === "YouTube" &&
-      video.type === "Trailer"
-  );
+      const videos = await getMovieVideos(id);
 
-  setTrailer(officialTrailer);
-}
+      const officialTrailer = videos.find(
+        (video) =>
+          video.site === "YouTube" &&
+          video.type === "Trailer"
+      );
+
+      setTrailer(officialTrailer);
+    }
 
     loadMovie();
   }, [id]);
+
+  function toggleFavorite() {
+    const favorites = getFavorites();
+
+    let updatedFavorites;
+
+    if (favorites.includes(movie.id)) {
+      updatedFavorites = favorites.filter(
+        (id) => id !== movie.id
+      );
+    } else {
+      updatedFavorites = [...favorites, movie.id];
+    }
+
+    saveFavorites(updatedFavorites);
+
+    setIsFavorite(updatedFavorites.includes(movie.id));
+  }
 
   if (!movie) {
     return (
@@ -42,71 +69,80 @@ function MovieDetails() {
   }
 
   return (
-  <section className="movie-details">
-    <div
-      className="backdrop"
-      style={{
-        backgroundImage: `linear-gradient(
-          rgba(15,15,15,0.8),
-          rgba(15,15,15,1)
-        ), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
-      }}
-    >
-      <div className="movie-header">
-        <img
-          className="movie-poster"
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
-        />
+    <section className="movie-details">
+      <div
+        className="backdrop"
+        style={{
+          backgroundImage: `linear-gradient(
+            rgba(15,15,15,0.8),
+            rgba(15,15,15,1)
+          ), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+        }}
+      >
+        <div className="movie-header">
+          <img
+            className="movie-poster"
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+          />
 
-        <div className="movie-content">
-          <h1>{movie.title}</h1>
+          <div className="movie-content">
+            <h1>{movie.title}</h1>
 
-          <p className="rating">
-            ⭐ {movie.vote_average.toFixed(1)}
-          </p>
+            <p className="rating">
+              ⭐ {movie.vote_average.toFixed(1)}
+            </p>
 
-          <div className="genres">
-            {movie.genres.map((genre) => (
-              <span key={genre.id} className="genre">
-                {genre.name}
-              </span>
-            ))}
+            <div className="genres">
+              {movie.genres.map((genre) => (
+                <span key={genre.id} className="genre">
+                  {genre.name}
+                </span>
+              ))}
+            </div>
+
+            <p>
+              📅 <strong>Release:</strong> {movie.release_date}
+            </p>
+
+            <p>
+              ⏱ <strong>Runtime:</strong> {movie.runtime} min
+            </p>
+
+            <p>
+              🌍 <strong>Language:</strong>{" "}
+              {movie.original_language.toUpperCase()}
+            </p>
+
+            {trailer && (
+              <a
+                href={`https://www.youtube.com/watch?v=${trailer.key}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="trailer-btn"
+              >
+                ▶ Watch Trailer
+              </a>
+            )}
+
+            <button
+              className="favorite-btn"
+              onClick={toggleFavorite}
+            >
+              {isFavorite
+                ? "❤️ Remove Favorite"
+                : "🤍 Add to Favorites"}
+            </button>
           </div>
-
-          <p>
-            📅 <strong>Release:</strong> {movie.release_date}
-          </p>
-
-          <p>
-            ⏱ <strong>Runtime:</strong> {movie.runtime} min
-          </p>
-
-          <p>
-            🌍 <strong>Language:</strong>{" "}
-            {movie.original_language.toUpperCase()}
-          </p>
-
-          {trailer && (
-  <a
-    href={`https://www.youtube.com/watch?v=${trailer.key}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="trailer-btn"
-  >
-    ▶ Watch Trailer
-  </a>
-)}
         </div>
       </div>
-    </div>
 
-    <div className="overview">
-      <h2>Overview</h2>
-      <p>{movie.overview}</p>
-    </div>
-  </section>
-);
+      <div className="overview">
+        <h2>Overview</h2>
+        <p>{movie.overview}</p>
+      </div>
+    </section>
+  );
 }
 
 export default MovieDetails;
