@@ -164,3 +164,19 @@
     justify-content: center;
   }
 }
+
+.similar-section {
+  padding: 0 8% 80px;
+}
+
+.similar-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.similar-section .movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}

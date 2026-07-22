@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import "./Books.css";
 import BookModal from "../../components/BookModal/BookModal";
 import { searchBooks } from "../../services/books";
@@ -9,10 +10,23 @@ function Books() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    loadBooks("bestseller");
-  }, []);
+  async function initializeBooks() {
+    const query = searchParams.get("search");
+
+    if (query) {
+      const data = await searchBooks(query);
+      setBooks(data);
+      setSearch(query);
+    } else {
+      loadBooks("bestseller");
+    }
+  }
+
+  initializeBooks();
+}, [searchParams]);
 
   async function loadBooks(query) {
   setLoading(true);

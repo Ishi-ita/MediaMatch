@@ -1,0 +1,65 @@
+.search-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.search-modal {
+  width: 420px;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 35px;
+  text-align: center;
+  animation: popup .25s ease;
+}
+
+.search-modal h2 {
+  margin-bottom: 12px;
+  color: white;
+}
+
+.search-modal p {
+  color: #cfcfcf;
+  margin-bottom: 30px;
+}
+
+.choice-btn {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.choice-btn:hover {
+  transform: scale(1.03);
+}
+
+.cancel-btn {
+  margin-top: 10px;
+  background: transparent;
+  border: none;
+  color: #bbb;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: scale(.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

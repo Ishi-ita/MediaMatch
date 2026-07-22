@@ -6,7 +6,10 @@ import "./MovieDetails.css";
 import {
   getMovieDetails,
   getMovieVideos,
+  getSimilarMovies,
 } from "../../services/tmdb";
+
+import MovieCard from "../../components/MovieCard/MovieCard";
 
 import {
   getFavorites,
@@ -19,6 +22,7 @@ function MovieDetails() {
   const [movie, setMovie] = useState(null);
   const [trailer, setTrailer] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [similarMovies, setSimilarMovies] = useState([]);
 
   useEffect(() => {
     async function loadMovie() {
@@ -37,6 +41,8 @@ function MovieDetails() {
       );
 
       setTrailer(officialTrailer);
+      const similar = await getSimilarMovies(id);
+setSimilarMovies(similar.slice(0, 4));
     }
 
     loadMovie();
@@ -170,6 +176,21 @@ function MovieDetails() {
         <h2>Overview</h2>
         <p>{movie.overview}</p>
       </div>
+      <section className="similar-section">
+  <h2>You May Also Like</h2>
+
+  <div className="movies-grid">
+    {similarMovies.map((movie) => (
+      <MovieCard
+        key={movie.id}
+        id={movie.id}
+        title={movie.title}
+        rating={movie.vote_average.toFixed(1)}
+        image={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+      />
+    ))}
+  </div>
+</section>
     </section>
   );
 }

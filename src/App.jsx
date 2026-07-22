@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
-
+import Recommended from "./pages/Recommended/Recommended";
 
 import Layout from "./layout/Layout";
 
@@ -29,6 +29,8 @@ function App() {
         <Route path="favorites" element={<Favorites />} />
 
         <Route path="search" element={<Search />} />
+
+        <Route path="recommended" element={<Recommended />} />
 
       </Route>
     </Routes>

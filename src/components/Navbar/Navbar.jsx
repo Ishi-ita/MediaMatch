@@ -4,11 +4,9 @@ import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <nav className="navbar">
-
       <h2 className="logo">🎬 MediaMatch</h2>
 
       <ul className="nav-links">
-
         <li>
           <Link to="/">Home</Link>
         </li>
@@ -25,10 +23,10 @@ function Navbar() {
           <Link to="/favorites">Favorites</Link>
         </li>
 
-        
-
+        <li>
+          <Link to="/recommended">Recommended</Link>
+        </li>
       </ul>
-
     </nav>
   );
 }

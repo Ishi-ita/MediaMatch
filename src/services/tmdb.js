@@ -69,3 +69,13 @@ export async function getMovieById(id) {
 
   return await response.json();
 }
+
+export async function getSimilarMovies(id) {
+  const response = await fetch(
+    `${BASE_URL}/movie/${id}/similar?api_key=${API_KEY}`
+  );
+
+  const data = await response.json();
+
+  return data.results || [];
+}

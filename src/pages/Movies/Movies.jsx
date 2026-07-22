@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import "./Movies.css";
 
 import MovieCard from "../../components/MovieCard/MovieCard";
@@ -11,15 +12,25 @@ function Movies() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    async function loadMovies() {
+  async function loadMovies() {
+    const query = searchParams.get("search");
+
+    if (query) {
+      setSearch(query);
+
+      const data = await searchMovies(query);
+      setMovies(data);
+    } else {
       const data = await getPopularMovies(page);
       setMovies(data);
     }
+  }
 
-    loadMovies();
-  }, [page]);
+  loadMovies();
+}, [page, searchParams]);
 
   async function handleSearch() {
     if (!search.trim()) {
