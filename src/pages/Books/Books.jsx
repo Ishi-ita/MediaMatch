@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
 import "./Books.css";
-
+import BookModal from "../../components/BookModal/BookModal";
 import { searchBooks } from "../../services/books";
 import BookCard from "../../components/BookCard/BookCard";
 
 function Books() {
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
     loadBooks("bestseller");
   }, []);
 
   async function loadBooks(query) {
-    const data = await searchBooks(query);
-    setBooks(data);
-  }
+  setLoading(true);
+
+  const data = await searchBooks(query);
+
+  setBooks(data);
+  setLoading(false);
+}
 
   function handleSearch() {
     if (search.trim() === "") return;
@@ -46,24 +52,49 @@ function Books() {
         </button>
       </div>
 
-      <div className="books-grid">
-        {books.map((book) => (
-          <BookCard
-            key={book.id}
-            title={book.volumeInfo.title}
-            author={
-              book.volumeInfo.authors
-                ? book.volumeInfo.authors.join(", ")
-                : "Unknown Author"
-            }
-            image={
-              book.volumeInfo.imageLinks?.thumbnail ||
-              "https://via.placeholder.com/128x190?text=No+Image"
-            }
-            rating={book.volumeInfo.averageRating || "N/A"}
-          />
-        ))}
-      </div>
+      {loading ? (
+  <div className="loading">
+    <h2>Loading books...</h2>
+  </div>
+) : books.length === 0 ? (
+  <div className="no-results">
+    <h2>📚 No books found.</h2>
+    <p>Try another search.</p>
+  </div>
+) : (
+  <div className="books-grid">
+    {books.map((book) => (
+      <div
+  key={book.id}
+  onClick={() => setSelectedBook(book)}
+  style={{ cursor: "pointer" }}
+>
+  <BookCard
+    title={book.volumeInfo.title}
+    author={
+      book.volumeInfo.authors
+        ? book.volumeInfo.authors.join(", ")
+        : "Unknown Author"
+    }
+    image={
+      book.volumeInfo.imageLinks?.thumbnail ||
+      "https://via.placeholder.com/128x190?text=No+Image"
+    }
+    rating={book.volumeInfo.averageRating || "N/A"}
+    published={
+      book.volumeInfo.publishedDate
+        ? book.volumeInfo.publishedDate.substring(0, 4)
+        : "----"
+    }
+  />
+</div>
+    ))}
+  </div>
+)}
+<BookModal
+  book={selectedBook}
+  onClose={() => setSelectedBook(null)}
+/>
     </section>
   );
 }

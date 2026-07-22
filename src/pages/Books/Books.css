@@ -1,0 +1,11 @@
+.loading,
+.no-results {
+  text-align: center;
+  color: white;
+  margin-top: 60px;
+}
+
+.no-results p {
+  color: #aaa;
+  margin-top: 10px;
+}

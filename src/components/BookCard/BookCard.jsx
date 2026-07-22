@@ -1,6 +1,12 @@
 import "./BookCard.css";
 
-function BookCard({ title, author, rating, image }) {
+function BookCard({
+  image,
+  title,
+  author,
+  rating,
+  published,
+}) {
   return (
     <div className="book-card">
       <img src={image} alt={title} />
@@ -10,7 +16,10 @@ function BookCard({ title, author, rating, image }) {
 
         <p className="author">{author}</p>
 
-        <p className="rating">⭐ {rating}</p>
+        <div className="book-meta">
+          <span>⭐ {rating}</span>
+          <span>{published}</span>
+        </div>
       </div>
     </div>
   );
