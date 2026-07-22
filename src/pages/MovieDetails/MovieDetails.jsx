@@ -56,7 +56,6 @@ function MovieDetails() {
     }
 
     saveFavorites(updatedFavorites);
-
     setIsFavorite(updatedFavorites.includes(movie.id));
   }
 
@@ -74,7 +73,7 @@ function MovieDetails() {
         className="backdrop"
         style={{
           backgroundImage: `linear-gradient(
-            rgba(15,15,15,0.8),
+            rgba(15,15,15,0.85),
             rgba(15,15,15,1)
           ), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
         }}
@@ -93,26 +92,54 @@ function MovieDetails() {
               ⭐ {movie.vote_average.toFixed(1)}
             </p>
 
+            <p className="votes">
+              {movie.vote_count.toLocaleString()} votes
+            </p>
+
             <div className="genres">
               {movie.genres.map((genre) => (
-                <span key={genre.id} className="genre">
+                <span
+                  key={genre.id}
+                  className="genre"
+                >
                   {genre.name}
                 </span>
               ))}
             </div>
 
-            <p>
-              📅 <strong>Release:</strong> {movie.release_date}
-            </p>
+            <div className="movie-info-grid">
+              <div className="info-card">
+                <span>📅</span>
+                <div>
+                  <h4>Release</h4>
+                  <p>{movie.release_date}</p>
+                </div>
+              </div>
 
-            <p>
-              ⏱ <strong>Runtime:</strong> {movie.runtime} min
-            </p>
+              <div className="info-card">
+                <span>⏱</span>
+                <div>
+                  <h4>Runtime</h4>
+                  <p>{movie.runtime} min</p>
+                </div>
+              </div>
 
-            <p>
-              🌍 <strong>Language:</strong>{" "}
-              {movie.original_language.toUpperCase()}
-            </p>
+              <div className="info-card">
+                <span>🌍</span>
+                <div>
+                  <h4>Language</h4>
+                  <p>{movie.original_language.toUpperCase()}</p>
+                </div>
+              </div>
+
+              <div className="info-card">
+                <span>🔥</span>
+                <div>
+                  <h4>Popularity</h4>
+                  <p>{Math.round(movie.popularity)}</p>
+                </div>
+              </div>
+            </div>
 
             {trailer && (
               <a
@@ -126,11 +153,13 @@ function MovieDetails() {
             )}
 
             <button
-              className="favorite-btn"
+              className={`favorite-btn ${
+                isFavorite ? "active" : ""
+              }`}
               onClick={toggleFavorite}
             >
               {isFavorite
-                ? "❤️ Remove Favorite"
+                ? "❤️ Favorited"
                 : "🤍 Add to Favorites"}
             </button>
           </div>
