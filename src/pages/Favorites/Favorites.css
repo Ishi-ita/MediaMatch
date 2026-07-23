@@ -52,3 +52,10 @@
 .remove-btn:hover {
   background: #dc2626;
 }
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
