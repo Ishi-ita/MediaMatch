@@ -11,10 +11,7 @@ import {
 
 import MovieCard from "../../components/MovieCard/MovieCard";
 
-import {
-  getFavorites,
-  saveFavorites,
-} from "../../utils/favorites";
+import * as Favorites from "../../utils/favorites";
 
 function MovieDetails() {
   const { id } = useParams();
@@ -29,8 +26,8 @@ function MovieDetails() {
       const data = await getMovieDetails(id);
       setMovie(data);
 
-      const favorites = getFavorites();
-      setIsFavorite(favorites.includes(data.id));
+      console.log(Favorites);
+setIsFavorite(Favorites.isFavorite(data.id, "movie"));
 
       const videos = await getMovieVideos(id);
 
@@ -49,21 +46,18 @@ setSimilarMovies(similar.slice(0, 4));
   }, [id]);
 
   function toggleFavorite() {
-    const favorites = getFavorites();
+  if (Favorites.isFavorite(movie.id, "movie")) {
+    Favorites.removeFavorite(movie.id, "movie");
+    setIsFavorite(false);
+  } else {
+    Favorites.addFavorite({
+      id: movie.id,
+      type: "movie",
+    });
 
-    let updatedFavorites;
-
-    if (favorites.includes(movie.id)) {
-      updatedFavorites = favorites.filter(
-        (id) => id !== movie.id
-      );
-    } else {
-      updatedFavorites = [...favorites, movie.id];
-    }
-
-    saveFavorites(updatedFavorites);
-    setIsFavorite(updatedFavorites.includes(movie.id));
+    setIsFavorite(true);
   }
+}
 
   if (!movie) {
     return (

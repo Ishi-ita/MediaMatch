@@ -79,3 +79,4 @@ export async function getSimilarMovies(id) {
 
   return data.results || [];
 }
+
