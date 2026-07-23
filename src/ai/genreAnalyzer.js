@@ -1,29 +1,27 @@
-import { getFavorites } from "../utils/favorites";
-import { getMovieDetails } from "../services/tmdb";
+export function analyzeUserTaste(profile) {
+  const movieGenres = {};
+  const bookCategories = {};
 
-export async function analyzeGenres() {
-  const favorites = getFavorites();
+  // Analyze movie genres
+  profile.favoriteMovies.forEach((movie) => {
+    movie.genres.forEach((genre) => {
+      movieGenres[genre.name] =
+        (movieGenres[genre.name] || 0) + 1;
+    });
+  });
 
-  const genreScores = {};
+  // Analyze book categories
+  profile.favoriteBooks.forEach((book) => {
+    if (!book.categories) return;
 
-  for (const movieId of favorites) {
-    try {
-      const movie = await getMovieDetails(movieId);
+    book.categories.forEach((category) => {
+      bookCategories[category] =
+        (bookCategories[category] || 0) + 1;
+    });
+  });
 
-      movie.genres.forEach((genre) => {
-        if (!genreScores[genre.name]) {
-          genreScores[genre.name] = 0;
-        }
-
-        genreScores[genre.name]++;
-      });
-    } catch (error) {
-      console.error(
-        `Failed to load movie ${movieId}`,
-        error
-      );
-    }
-  }
-
-  return genreScores;
+  return {
+    movieGenres,
+    bookCategories,
+  };
 }

@@ -1,21 +1,23 @@
 import { getFavorites } from "../utils/favorites";
-import { getSearchHistory } from "../utils/searchHistory";
-import { getViewHistory } from "../utils/viewHistory";
+import { getBookFavorites } from "../utils/bookFavorites";
+import { getMovieDetails } from "../services/tmdb";
 
-export function buildUserProfile() {
-  const favorites = getFavorites();
-  const searches = getSearchHistory();
-  const views = getViewHistory();
+export async function buildUserProfile() {
+  const favoriteMovies = getFavorites();
+  const favoriteBooks = getBookFavorites();
+
+  // Fetch complete movie details
+  const movies = await Promise.all(
+    favoriteMovies.map((movie) =>
+      getMovieDetails(movie.id)
+    )
+  );
 
   return {
-    favorites,
-    searches,
-    views,
+    favoriteMovies: movies,
+    favoriteBooks,
 
-    totalFavorites: favorites.length,
-    totalSearches: searches.length,
-    totalViews: views.length,
-
-    searchedKeywords: searches.map((item) => item.query),
+    totalMovies: movies.length,
+    totalBooks: favoriteBooks.length,
   };
 }

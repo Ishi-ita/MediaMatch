@@ -1,13 +1,55 @@
-import { buildUserProfile } from "./profileBuilder";
-import { scoreMovie } from "./scorer";
+export function recommendContent(
+  tasteProfile,
+  movies,
+  books
+) {
+  const recommendedMovies = movies
+    .map((movie) => {
+      let score = 0;
 
-export function getRecommendations(candidateMovies) {
-  const profile = buildUserProfile();
+      if (movie.genres) {
+        movie.genres.forEach((genre) => {
+          score +=
+            tasteProfile.movieGenres[genre.name] || 0;
+        });
+      }
 
-  return candidateMovies
-    .map((movie) => ({
-      ...movie,
-      score: scoreMovie(movie, profile),
-    }))
-    .sort((a, b) => b.score - a.score);
+      return {
+        ...movie,
+        recommendationScore: score,
+      };
+    })
+    .sort(
+      (a, b) =>
+        b.recommendationScore -
+        a.recommendationScore
+    );
+
+  const recommendedBooks = books
+    .map((book) => {
+      let score = 0;
+
+      const categories =
+        book.volumeInfo?.categories || [];
+
+      categories.forEach((category) => {
+        score +=
+          tasteProfile.bookCategories[category] || 0;
+      });
+
+      return {
+        ...book,
+        recommendationScore: score,
+      };
+    })
+    .sort(
+      (a, b) =>
+        b.recommendationScore -
+        a.recommendationScore
+    );
+
+  return {
+    movies: recommendedMovies.slice(0, 10),
+    books: recommendedBooks.slice(0, 10),
+  };
 }
