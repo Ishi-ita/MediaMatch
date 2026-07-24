@@ -33,3 +33,15 @@
   color: #8b5cf6;
   margin-bottom: 15px;
 }
+
+.movies-grid,
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.recommended-page h2 {
+  margin-top: 40px;
+}
