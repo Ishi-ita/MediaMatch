@@ -26,7 +26,6 @@ function MovieDetails() {
       const data = await getMovieDetails(id);
       setMovie(data);
 
-      console.log(Favorites);
 setIsFavorite(Favorites.isFavorite(data.id, "movie"));
 
       const videos = await getMovieVideos(id);

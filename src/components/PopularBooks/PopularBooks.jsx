@@ -4,7 +4,6 @@ import books from "../../data/books";
 import SectionTitle from "../SectionTitle/SectionTitle";
 
 function PopularBooks() {
-  console.log(books);
   return (
     <section className="popular-books">
       <SectionTitle icon="📚" title="Popular Books" />
