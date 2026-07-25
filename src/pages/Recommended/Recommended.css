@@ -1,47 +1,100 @@
 .recommended-page {
-  min-height: 80vh;
-  padding: 80px 8%;
-  color: white;
+  min-height: 100vh;
+
+  padding: 90px 8%;
+
+  background: var(--bg-main);
+
+  color: var(--text-primary);
 }
 
 .recommended-header {
-  max-width: 800px;
-  margin: auto;
   text-align: center;
+
+  max-width: 900px;
+
+  margin: auto auto 70px;
+}
+
+.ai-badge {
+  display: inline-block;
+
+  padding: 10px 22px;
+
+  margin-bottom: 22px;
+
+  border-radius: 999px;
+
+  background: rgba(207,157,123,.08);
+
+  border: 1px solid rgba(207,157,123,.25);
+
+  color: var(--accent);
+
+  font-weight: 600;
 }
 
 .recommended-header h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
+
   margin-bottom: 20px;
+
+  color: var(--text-primary);
 }
 
 .recommended-header p {
-  color: #cfcfcf;
-  line-height: 1.8;
-  margin-bottom: 20px;
+  max-width: 760px;
+
+  margin: auto;
+
+  line-height: 1.9;
+
+  color: var(--text-secondary);
+
+  font-size: 1.05rem;
 }
 
-.coming-soon {
-  margin-top: 60px;
-  background: rgba(255,255,255,.05);
-  border-radius: 20px;
-  padding: 40px;
-  border: 1px solid rgba(255,255,255,.08);
+.recommended-page h2 {
+  margin-bottom: 35px;
+
+  color: var(--text-primary);
+
+  font-size: 2.2rem;
 }
 
-.coming-soon h2 {
-  color: #8b5cf6;
-  margin-bottom: 15px;
+.books-title {
+  margin-top: 70px;
 }
 
 .movies-grid,
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
+
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+  gap: 35px;
+
   margin-top: 30px;
+
+  justify-items: center;
 }
 
-.recommended-page h2 {
-  margin-top: 40px;
+.recommended-page p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+
+  .recommended-page {
+    padding: 70px 6%;
+  }
+
+  .recommended-header h1 {
+    font-size: 2.8rem;
+  }
+
+  .recommended-page h2 {
+    font-size: 1.8rem;
+  }
+
 }

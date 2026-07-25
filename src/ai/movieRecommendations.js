@@ -4,25 +4,31 @@ import {
 } from "../services/tmdb";
 
 export async function getRecommendedMovies(profile) {
-  const recommendations = [];
   const seen = new Set();
 
-  for (const favorite of profile.favoriteMovies) {
-    const similarMovies = await getSimilarMovies(
-      favorite.id
-    );
+  // Get all similar movie lists in parallel
+  const similarLists = await Promise.all(
+    profile.favoriteMovies.map((movie) =>
+      getSimilarMovies(movie.id)
+    )
+  );
 
-    for (const movie of similarMovies) {
-      if (seen.has(movie.id)) continue;
+  // Collect unique movie IDs
+  const ids = [];
 
-      seen.add(movie.id);
+  similarLists.forEach((list) => {
+    list.forEach((movie) => {
+      if (!seen.has(movie.id)) {
+        seen.add(movie.id);
+        ids.push(movie.id);
+      }
+    });
+  });
 
-      // Fetch complete details so genres are available
-      const details = await getMovieDetails(movie.id);
+  // Fetch movie details in parallel
+  const movies = await Promise.all(
+    ids.map((id) => getMovieDetails(id))
+  );
 
-      recommendations.push(details);
-    }
-  }
-
-  return recommendations;
+  return movies;
 }

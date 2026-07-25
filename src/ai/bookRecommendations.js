@@ -1,39 +1,38 @@
 import { searchBooks } from "../services/books";
 
 export async function getRecommendedBooks(profile) {
-  const recommendations = [];
   const seen = new Set();
 
-  for (const book of profile.favoriteBooks) {
-    // Build a better search query
+  // Create all search requests first
+  const requests = profile.favoriteBooks.map((book) => {
     const queryParts = [];
 
-    if (book.title) {
-      queryParts.push(book.title);
-    }
-
-    if (book.author) {
-      queryParts.push(book.author);
-    }
-
-    if (book.categories && book.categories.length > 0) {
+    if (book.title) queryParts.push(book.title);
+    if (book.author) queryParts.push(book.author);
+    if (book.categories?.length > 0) {
       queryParts.push(book.categories[0]);
     }
 
-    const query = queryParts.join(" ");
+    return searchBooks(queryParts.join(" "));
+  });
 
-    const books = await searchBooks(query);
+  // Run all requests in parallel
+  const results = await Promise.all(requests);
+
+  const recommendations = [];
+
+  results.forEach((books, index) => {
+    const favoriteBook = profile.favoriteBooks[index];
 
     books.forEach((item) => {
-      // Don't recommend the same book
-      if (item.id === book.id) return;
+      if (item.id === favoriteBook.id) return;
 
       if (!seen.has(item.id)) {
         seen.add(item.id);
         recommendations.push(item);
       }
     });
-  }
+  });
 
   return recommendations;
 }

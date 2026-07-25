@@ -1,0 +1,139 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 90px 8%;
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+.profile-page h1 {
+  text-align: center;
+  font-size: 3.5rem;
+  margin-bottom: 55px;
+}
+
+.profile-card {
+  max-width: 1200px;
+  margin: auto;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 28px;
+
+  padding: 45px;
+
+  transition: var(--transition);
+}
+
+.profile-card h2 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: var(--text-primary);
+}
+
+.stats {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 25px;
+
+  margin: 35px 0;
+}
+
+.stat-box {
+  background: rgba(207, 157, 123, 0.05);
+
+  border: 1px solid rgba(207, 157, 123, 0.18);
+
+  border-radius: var(--radius);
+
+  padding: 30px;
+
+  text-align: center;
+
+  transition: var(--transition);
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+
+  border-color: var(--accent);
+
+  box-shadow: 0 10px 25px rgba(207, 157, 123, 0.12);
+}
+
+.stat-box h3 {
+  font-size: 2.8rem;
+
+  color: var(--accent);
+
+  margin-bottom: 10px;
+}
+
+.stat-box p {
+  color: var(--text-secondary);
+}
+
+.profile-card ul {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 14px;
+
+  list-style: none;
+
+  padding: 0;
+
+  margin-top: 25px;
+}
+
+.profile-card li {
+  padding: 10px 18px;
+
+  background: rgba(207, 157, 123, 0.08);
+
+  border: 1px solid rgba(207, 157, 123, 0.25);
+
+  border-radius: 999px;
+
+  color: var(--accent);
+
+  transition: var(--transition);
+}
+
+.profile-card li:hover {
+  background: rgba(207, 157, 123, 0.15);
+
+  border-color: var(--accent);
+}
+
+hr {
+  margin: 45px 0;
+
+  border: none;
+
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+
+  .profile-page {
+    padding: 70px 6%;
+  }
+
+  .profile-page h1 {
+    font-size: 2.8rem;
+  }
+
+  .profile-card {
+    padding: 30px;
+  }
+
+  .profile-card h2 {
+    font-size: 1.6rem;
+  }
+
+}

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./BookModal.css";
 
 import {
@@ -8,22 +7,15 @@ import {
 } from "../../utils/bookFavorites";
 
 function BookModal({ book, onClose }) {
-  const [favorite, setFavorite] = useState(false);
-
-  useEffect(() => {
-    if (book) {
-      setFavorite(isBookFavorite(book.id));
-    }
-  }, [book?.id]);
-
   if (!book) return null;
 
   const info = book.volumeInfo;
 
+  const favorite = isBookFavorite(book.id);
+
   function toggleFavorite() {
     if (favorite) {
       removeBookFavorite(book.id);
-      setFavorite(false);
     } else {
       addBookFavorite({
         id: book.id,
@@ -37,9 +29,10 @@ function BookModal({ book, onClose }) {
           info.publishedDate?.substring(0, 4) || "----",
         categories: info.categories || [],
       });
-
-      setFavorite(true);
     }
+
+    // Refresh component so button text updates
+    window.location.reload();
   }
 
   return (

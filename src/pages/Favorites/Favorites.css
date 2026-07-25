@@ -1,61 +1,114 @@
 .favorites-page {
   min-height: 100vh;
-  padding: 80px 8%;
-  background: var(--background);
+
+  padding: 90px 8%;
+
+  background: var(--bg-main);
 }
 
 .favorites-page h1 {
-  color: white;
-  font-size: 3rem;
-  margin-bottom: 40px;
+  font-size: 3.5rem;
+
+  margin-bottom: 55px;
+
+  color: var(--text-primary);
 }
 
-.movies-grid {
+.favorites-page h2 {
+  margin-bottom: 35px;
+
+  color: var(--text-primary);
+
+  font-size: 2.2rem;
+}
+
+.movies-grid,
+.books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 30px;
+
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+  gap: 35px;
+
   justify-items: center;
 }
 
-.no-results {
-  text-align: center;
-  color: white;
-  margin-top: 80px;
-}
-
-.no-results p {
-  color: #aaa;
-  margin-top: 10px;
+.books-grid {
+  margin-top: 25px;
 }
 
 .favorite-card {
   display: flex;
+
   flex-direction: column;
+
   align-items: center;
+
+  gap: 16px;
 }
 
 .remove-btn {
-  margin-top: 12px;
-  padding: 10px 18px;
+  width: 180px;
 
-  border: none;
-  border-radius: 25px;
+  padding: 13px 20px;
 
-  background: #ef4444;
-  color: white;
+  border-radius: 999px;
 
-  cursor: pointer;
+  border: 1px solid rgba(207,157,123,.25);
 
-  transition: 0.3s;
+  background: var(--surface);
+
+  color: var(--accent);
+
+  font-weight: 600;
+
+  transition: var(--transition);
 }
 
 .remove-btn:hover {
-  background: #dc2626;
+  background: var(--accent);
+
+  color: var(--bg-main);
+
+  border-color: var(--accent);
+
+  transform: translateY(-3px);
 }
 
-.books-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 30px;
-  margin-top: 30px;
+.no-results {
+  text-align: center;
+
+  margin-top: 80px;
+
+  color: var(--text-primary);
+}
+
+.no-results p {
+  margin-top: 14px;
+
+  color: var(--text-secondary);
+}
+
+.favorites-page p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+
+  .favorites-page {
+    padding: 70px 6%;
+  }
+
+  .favorites-page h1 {
+    font-size: 2.8rem;
+  }
+
+  .favorites-page h2 {
+    font-size: 1.8rem;
+  }
+
+}
+
+.books-title {
+  margin-top: 70px;
 }

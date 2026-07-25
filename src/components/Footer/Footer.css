@@ -1,7 +1,20 @@
 .footer {
+  margin-top: 80px;
+
+  padding: 28px;
+
   text-align: center;
-  padding: 25px;
-  background: #111;
-  color: #999;
-  border-top: 1px solid #222;
+
+  background: var(--surface);
+
+  border-top: 1px solid var(--border);
+
+  color: var(--text-secondary);
+
+  transition: var(--transition);
+}
+
+.footer p {
+  margin: 0;
+  font-size: .95rem;
 }

@@ -62,7 +62,7 @@ function Favorites() {
 
       {/* Movies */}
 
-      <h2>🎬 Favorite Movies</h2>
+      <h2>Favorite Movies</h2>
 
       {movies.length === 0 ? (
         <p>No favorite movies yet.</p>
@@ -95,8 +95,8 @@ function Favorites() {
 
       {/* Books */}
 
-      <h2 style={{ marginTop: "60px" }}>
-        📚 Favorite Books
+      <h2 className="books-title">
+         Favorite Books
       </h2>
 
       {books.length === 0 ? (

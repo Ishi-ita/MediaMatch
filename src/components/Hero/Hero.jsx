@@ -6,7 +6,7 @@ function Hero() {
     <section className="hero">
       <div className="hero-content">
 
-        <p className="brand">🎬 MediaMatch</p>
+        <p className="brand"> MediaMatch</p>
 
         <h1>
           Discover <span>|</span> Rate <span>|</span> Recommend

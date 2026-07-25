@@ -21,7 +21,11 @@ function LiveBooks() {
 
   return (
     <section className="live-books">
-      <SectionTitle icon="📚" title="Popular Books" />
+      <SectionTitle
+  icon="📚"
+  title="Popular Books"
+  link="/books"
+/>
 
       <div className="books-grid">
         {books.map((book) => (

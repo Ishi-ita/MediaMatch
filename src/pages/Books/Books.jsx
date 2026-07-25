@@ -44,7 +44,11 @@ function Books() {
 
   return (
     <section className="books-page">
-      <h1>📚 Books</h1>
+      <h1>
+  {search.trim()
+    ? ` Search Results for "${search}"`
+    : "Popular Books"}
+</h1>
 
       <div className="search-container">
         <input
@@ -72,16 +76,16 @@ function Books() {
   </div>
 ) : books.length === 0 ? (
   <div className="no-results">
-    <h2>📚 No books found.</h2>
+    <h2> No books found.</h2>
     <p>Try another search.</p>
   </div>
 ) : (
   <div className="books-grid">
     {books.map((book) => (
       <div
-  key={book.id}
+   key={book.id}
+  className="book-card-wrapper"
   onClick={() => setSelectedBook(book)}
-  style={{ cursor: "pointer" }}
 >
   <BookCard
     title={book.volumeInfo.title}

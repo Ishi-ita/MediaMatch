@@ -45,7 +45,11 @@ function Movies() {
 
   return (
     <section className="movies-page">
-      <h1>🎬 Popular Movies</h1>
+      <h1>
+  {search.trim()
+    ? `Search Results for "${search}"`
+    : "Popular Movies"}
+</h1>
 
       <div className="search-container">
         <input
@@ -71,7 +75,7 @@ function Movies() {
 
       {movies.length === 0 ? (
         <div className="no-results">
-          <h2>😕 No movies found.</h2>
+          <h2>No movies found.</h2>
           <p>Try another search.</p>
         </div>
       ) : (

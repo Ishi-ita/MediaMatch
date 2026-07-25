@@ -1,60 +1,146 @@
 .navbar {
-  height: 70px;
-  background-color: #111;
-  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  height: 78px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  padding: 0 50px;
+  padding: 0 60px;
 
-  border-bottom: 1px solid #222;
+  background: var(--surface);
+
+  border-bottom: 1px solid var(--border);
+
+  backdrop-filter: blur(18px);
+
+  transition: var(--transition);
 }
+
+/* ---------- Logo ---------- */
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 2.3rem;
+  color: var(--accent);
+
+  cursor: pointer;
+
+  transition: var(--transition);
 }
 
-.logo h2 {
-  color: #8b5cf6;
-  font-size: 28px;
+.logo:hover {
+  color: var(--secondary);
 }
 
-.logo-icon {
-  font-size: 30px;
-}
+/* ---------- Navigation ---------- */
 
 .nav-links {
-  list-style: none;
-
   display: flex;
-  gap: 35px;
+  align-items: center;
+  gap: 38px;
 }
 
 .nav-links li {
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 18px;
+  list-style: none;
 }
 
-.nav-links li:hover {
-  color: #8b5cf6;
+.nav-links a {
+  position: relative;
+
+  color: var(--text-primary);
+
+  font-size: 1rem;
+  font-weight: 500;
+
+  transition: var(--transition);
 }
 
-.nav-icons {
+/* underline animation */
+
+.nav-links a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -8px;
+
+  width: 0;
+  height: 2px;
+
+  background: var(--accent);
+
+  transform: translateX(-50%);
+
+  transition: .3s;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ---------- Theme Toggle ---------- */
+
+.theme-toggle {
+  width: 56px;
+  height: 32px;
+
+  border-radius: 999px;
+
+  background: var(--bg-main);
+
+  border: 1px solid var(--border);
+
   display: flex;
-  gap: 25px;
-  font-size: 22px;
-}
+  align-items: center;
+  justify-content: center;
 
-.nav-icons svg {
   cursor: pointer;
-  transition: 0.3s;
+
+  transition: var(--transition);
 }
 
-.nav-icons svg:hover {
-  color: #8b5cf6;
+.theme-toggle:hover {
+  box-shadow: 0 0 20px rgba(207,157,123,.25);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width:900px){
+
+.navbar{
+
+padding:0 20px;
+
+}
+
+.nav-links{
+
+gap:20px;
+
+}
+
+.logo{
+
+font-size:1.9rem;
+
+}
+
+}
+
+@media (max-width:700px){
+
+.nav-links{
+
+display:none;
+
+}
+
 }

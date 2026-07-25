@@ -1,10 +1,15 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+
+import { ThemeContext } from "../../context/ThemeContext";
 
 function Navbar() {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   return (
     <nav className="navbar">
-      <h2 className="logo">🎬 MediaMatch</h2>
+      <h2 className="logo">MediaMatch</h2>
 
       <ul className="nav-links">
         <li>
@@ -26,7 +31,25 @@ function Navbar() {
         <li>
           <Link to="/recommended">Recommended</Link>
         </li>
+
+        <li>
+          <Link to="/profile">Profile</Link>
+        </li>
       </ul>
+
+      <button
+        className="theme-toggle"
+        onClick={toggleTheme}
+        title="Switch Theme"
+      >
+        <span className={theme === "dark" ? "active" : ""}>
+          🌙
+        </span>
+
+        <span className={theme === "light" ? "active" : ""}>
+          ☀️
+        </span>
+      </button>
     </nav>
   );
 }

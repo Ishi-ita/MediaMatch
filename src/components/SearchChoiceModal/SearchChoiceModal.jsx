@@ -19,14 +19,14 @@ function SearchChoiceModal({
           className="choice-btn"
           onClick={onMovies}
         >
-          🎬 Search Movies
+          Search Movies
         </button>
 
         <button
           className="choice-btn"
           onClick={onBooks}
         >
-          📚 Search Books
+          Search Books
         </button>
 
         <button

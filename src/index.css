@@ -1,13 +1,42 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap");
 
 :root {
-  --background: #0f0f0f;
-  --card: #1a1a1a;
-  --primary: #8b5cf6;
-  --primary-hover: #a78bfa;
-  --green: #1db954;
-  --text: #ffffff;
-  --secondary-text: #b3b3b3;
+  /* Dark Theme */
+
+  --bg-main: #0C1519;
+  --surface: #162127;
+
+  --border: #3A3534;
+  --secondary: #724B39;
+  --accent: #CF9D7B;
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+
+  --radius: 20px;
+
+  --transition: all 0.3s ease;
+}
+
+[data-theme="light"] {
+
+  /* Warm Butter Theme */
+
+  --bg-main: #F8F2E7;
+
+  --surface: #FFFDF8;
+
+  --border: #D6C3AE;
+
+  --secondary: #724B39;
+
+  --accent: #A96E4D;
+
+  --text-primary: #162127;
+
+  --text-secondary: #5D6974;
+
 }
 
 * {
@@ -18,8 +47,8 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background: var(--background);
-  color: var(--text);
+  background: var(--bg-main);
+  color: var(--text-primary);
 }
 
 a {
@@ -38,4 +67,31 @@ img {
 
 ul {
   list-style: none;
+}
+
+h1,
+h2,
+h3,
+.logo {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+p,
+span,
+button,
+input,
+textarea,
+li,
+a {
+  font-family: "Poppins", sans-serif;
+}
+
+button {
+  transition: var(--transition);
+}
+
+button:hover {
+  opacity: 0.95;
 }

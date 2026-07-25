@@ -76,9 +76,20 @@ function Recommended() {
 
   return (
     <section className="recommended-page">
-      <h1>✨ Recommended For You</h1>
+      <div className="recommended-header">
+  <span className="ai-badge">
+    AI Powered Recommendations
+  </span>
 
-      <h2>🎬 Movies You May Like</h2>
+  <h1>Recommended For You</h1>
+
+  <p>
+    Based on your favourite movies and books, MediaMatch has
+    selected stories you're most likely to enjoy.
+  </p>
+</div>
+
+      <h2> Movies You May Like</h2>
 
       {movies.length === 0 ? (
         <p>No movie recommendations found.</p>
@@ -96,9 +107,9 @@ function Recommended() {
         </div>
       )}
 
-      <h2 style={{ marginTop: "60px" }}>
-        📚 Books You May Like
-      </h2>
+      <h2 className="books-title">
+  Books You May Like
+</h2>
 
       {books.length === 0 ? (
         <p>No book recommendations found.</p>

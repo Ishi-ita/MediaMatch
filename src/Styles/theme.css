@@ -1,0 +1,35 @@
+/* ===========================
+   MediaMatch Design System
+=========================== */
+
+/* ---------- Dark Theme ---------- */
+
+:root {
+  --bg-main: #0C1519;
+  --surface: #162127;
+
+  --border: #3A3534;
+  --secondary: #724B39;
+  --accent: #CF9D7B;
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+
+  --radius: 20px;
+
+  --transition: all .3s ease;
+}
+
+/* ---------- Light Theme ---------- */
+
+.light-theme {
+  --bg-main: #F8FAF9;
+  --surface: #FFFFFF;
+
+  --border: #E2E8F0;
+  --secondary: #724B39;
+  --accent: #9E6B4E;
+
+  --text-primary: #0C1519;
+  --text-secondary: #475569;
+}
