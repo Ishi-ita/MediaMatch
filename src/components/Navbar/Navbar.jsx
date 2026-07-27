@@ -1,55 +1,75 @@
-import "./Navbar.css";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { HiMenu, HiX } from "react-icons/hi";
 
+import "./Navbar.css";
 import { ThemeContext } from "../../context/ThemeContext";
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const { theme, toggleTheme } = useContext(ThemeContext);
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
 
   return (
     <nav className="navbar">
-      <h2 className="logo">MediaMatch</h2>
+      <Link to="/" className="logo">
+        MediaMatch
+      </Link>
 
-      <ul className="nav-links">
+      <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" onClick={closeMenu}>
+            Home
+          </Link>
         </li>
 
         <li>
-          <Link to="/movies">Movies</Link>
+          <Link to="/movies" onClick={closeMenu}>
+            Movies
+          </Link>
         </li>
 
         <li>
-          <Link to="/books">Books</Link>
+          <Link to="/books" onClick={closeMenu}>
+            Books
+          </Link>
         </li>
 
         <li>
-          <Link to="/favorites">Favorites</Link>
+          <Link to="/favorites" onClick={closeMenu}>
+            Favorites
+          </Link>
         </li>
 
         <li>
-          <Link to="/recommended">Recommended</Link>
+          <Link to="/recommended" onClick={closeMenu}>
+            Recommended
+          </Link>
         </li>
 
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile" onClick={closeMenu}>
+            Profile
+          </Link>
         </li>
       </ul>
 
-      <button
-        className="theme-toggle"
-        onClick={toggleTheme}
-        title="Switch Theme"
-      >
-        <span className={theme === "dark" ? "active" : ""}>
-          🌙
-        </span>
+      <div className="navbar-right">
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === "dark" ? "☀️" : "🌙"}
+        </button>
 
-        <span className={theme === "light" ? "active" : ""}>
-          ☀️
-        </span>
-      </button>
+        <button
+          className="menu-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <HiX /> : <HiMenu />}
+        </button>
+      </div>
     </nav>
   );
 }
