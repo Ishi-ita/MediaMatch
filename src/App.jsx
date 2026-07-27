@@ -3,7 +3,7 @@ import MovieDetails from "./pages/MovieDetails/MovieDetails";
 import Recommended from "./pages/Recommended/Recommended";
 import Profile from "./pages/Profile/Profile";
 
-import Layout from "./layout/Layout";
+import Layout from "./Layout/Layout";
 
 import Home from "./pages/Home/Home";
 import Movies from "./pages/Movies/Movies";
